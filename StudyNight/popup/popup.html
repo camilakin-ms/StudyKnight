@@ -16,14 +16,52 @@
         <h1> Study Knight! </h1>
     </div>
     <div>
-        <h4> Enter your tasks: </h4>
-        <input type="text" id="tasks">
-        <button type="submit" id="submitTaskBtn">Submit task</button>
-        <p>Your tasks:</p><br>
-        <input type="checkbox" id="checkTask1">
-        <label for="checkTask1" id="task1"></label>
+        <form>
+            <p>Your tasks:</p><br>
+            <div id="taskPrint"></div>
+            <input type="checkbox" id="checkTask1">
+            <label for="checkTask1" id="labelTask1"><input type="text" id="task1" ></label> <br>
+            <input type="checkbox" id="checkTask2">
+            <label for="checkTask2" id="labelTask2"><input type="text" id="task2" ></label> <br>
+            <input type="checkbox" id="checkTask3">
+            <label for="checkTask3" id="labelTask3"><input type="text" id="task3" ></label> <br>
+            <input type="checkbox" id="checkTask4">
+            <label for="checkTask4" id="labelTask4"><input type="text" id="task4" ></label> <br>
+            <input type="checkbox" id="checkTask5">
+            <label for="checkTask5" id="labelTask5"><input type="text" id="task5" ></label> <br>
+            <button type="submit" id="submitTaskBtn">Submit tasks</button>
+        </form>
     </div>
 
+    <div id="countdown"></div>
+
+    <script>
+        // Set the target date and time for the countdown (3 hours from now)
+        const targetDate = new Date();
+        targetDate.setHours(targetDate.getHours() + 3);
+        
+        function updateCountdown() {
+            const currentDate = new Date();
+            const timeDifference = targetDate - currentDate;
+        
+            if (timeDifference > 0) {
+                const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+        
+                document.getElementById('countdown').innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+            } else {
+                document.getElementById('countdown').innerHTML = 'Countdown expired!';
+            }
+        }
+        
+        // Update the countdown every second
+        setInterval(updateCountdown, 1000);
+        
+        // Initial call to set the initial countdown value
+        updateCountdown();
+        </script>
+        
     
 </body>
 <script src="popup.js"></script>

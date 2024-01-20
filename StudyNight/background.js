@@ -1,11 +1,11 @@
 chrome.runtime.onMessage.addListener(data=> {
-    let {event, task} = data
-    if(event == 'taskSubmitted'){
-        handleTaskSubmit(task);
+    let {event, tasks} = data
+    if(event == 'tasksSubmitted'){
+        handleTaskSubmit(tasks);
     }
 })
 
-let handleTaskSubmit = (task) => {
+let handleTaskSubmit = (tasks) => {
     console.log("Task received in background.");
-    console.log("Task received: ", task);
+    console.log("Task received: ", tasks);
 }
