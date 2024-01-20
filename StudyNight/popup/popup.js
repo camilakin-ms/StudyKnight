@@ -26,7 +26,7 @@ function displayTasks() {
     let dispTask3 = task3Element.value;
     let dispTask4 = task4Element.value;
     let dispTask5 = task5Element.value;
-    document.getElementById("task1").innerHTML = createElement("p");
+    document.getElementById("task1").innerHTML = document.createElement("p");
     document.getElementById("task2").innerHTML = dispTask2;
     document.getElementById("task3").innerHTML = dispTask3;
     document.getElementById("task4").innerHTML = dispTask4;

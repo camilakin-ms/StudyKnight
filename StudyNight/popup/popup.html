@@ -32,36 +32,6 @@
             <button type="submit" id="submitTaskBtn">Submit tasks</button>
         </form>
     </div>
-
-    <div id="countdown"></div>
-
-    <script>
-        // Set the target date and time for the countdown (3 hours from now)
-        const targetDate = new Date();
-        targetDate.setHours(targetDate.getHours() + 3);
-        
-        function updateCountdown() {
-            const currentDate = new Date();
-            const timeDifference = targetDate - currentDate;
-        
-            if (timeDifference > 0) {
-                const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-        
-                document.getElementById('countdown').innerHTML = `${hours}h ${minutes}m ${seconds}s`;
-            } else {
-                document.getElementById('countdown').innerHTML = 'Countdown expired!';
-            }
-        }
-        
-        // Update the countdown every second
-        setInterval(updateCountdown, 1000);
-        
-        // Initial call to set the initial countdown value
-        updateCountdown();
-        </script>
-        
     
 </body>
 <script src="popup.js"></script>
