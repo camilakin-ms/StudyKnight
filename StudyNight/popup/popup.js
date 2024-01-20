@@ -1,20 +1,65 @@
-//ELEMENTS
-const taskElement = document.getElementById("tasks")
+//XP ELEMENT
+let xpElement = 0
+
+//TASK ELEMENTS
+const task1Element = document.getElementById("task1")
+const task2Element = document.getElementById("task2")
+const task3Element = document.getElementById("task3")
+const task4Element = document.getElementById("task4")
+const task5Element = document.getElementById("task5")
+
+//CHECKBOX ELEMENTS
+const check1Element = document.getElementById("checkTask1")
+const check2Element = document.getElementById("checkTask2")
+const check3Element = document.getElementById("checkTask3")
+const check4Element = document.getElementById("checkTask4")
+const check5Element = document.getElementById("checkTask5")
+const checkboxes = [check1Element, check2Element, check3Element, check4Element, check5Element];
+
 
 //BUTTONS
-const submitTaskButton = document.getElementById("submitTaskBtn")
+const submitTasksButton = document.getElementById("submitTaskBtn")
 
-submitTaskButton.onclick = () => {
-    const task = {
-        task1: taskElement.value,
+//BUTTON TO SUBMIT TASKS
+submitTasksButton.onclick = () => {
+    const tasks = {
+        task1: task1Element.value,
+        task2: task2Element.value,
+        task3: task3Element.value,
+        task4: task4Element.value,
+        task5: task5Element.value,
     } 
-    chrome.runtime.sendMessage({event: 'taskSubmitted', task})
-    displayTask();
+    chrome.runtime.sendMessage({event: 'tasksSubmitted', tasks})
 }
 
-function displayTask() {
-    let dispTask = taskElement.value;
-    document.getElementById("task1").innerHTML = dispTask;
-    
+//ADDS 100 POINTS FOR TASK CHECKED
+function add100(){
+    xpElement += 100;
+    document.getElementById("XP").innerHTML = xpElement;
+    console.log("Current XP: ", xpElement)
+}
+//TAKES AWAY 100 POINTS FOR TASK UNCHECKED
+function sub100() {
+    xpElement -= 100;
+    document.getElementById("XP").innerHTML = xpElement;
+    console.log("Current XP: ", xpElement)
 }
 
+
+function handleCheckboxClick(index) { return () => {
+        const checkedEvent = `checked${index + 1}`;
+        const uncheckedEvent = `unchecked${index + 1}`;
+
+        if (checkboxes[index].checked) {
+            chrome.runtime.sendMessage({ event: checkedEvent });
+            add100();
+        } else {
+            chrome.runtime.sendMessage({ event: uncheckedEvent });
+            sub100();
+        }
+    };
+}
+
+checkboxes.forEach((checkbox, index) => {
+    checkbox.onclick = handleCheckboxClick(index);
+});
