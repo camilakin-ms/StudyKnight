@@ -63,3 +63,30 @@ function handleCheckboxClick(index) { return () => {
 checkboxes.forEach((checkbox, index) => {
     checkbox.onclick = handleCheckboxClick(index);
 });
+
+//storage
+chrome.storage.local.get(["task1","task2","task3","task4","task5"], (result) =>{
+	const {task1,task2,task3,task4,task5} = result;
+	if (task1){
+		task1Element.value = task1
+		console.log("task1 value retrieved: ", task1)
+	}
+	if (task2){
+		task2Element.value = task2
+		console.log("task2 value retrieved: ", task2)
+	}
+	if (task3){
+		task3Element.value = task3
+		console.log("task3 value retrieved: ", task3)
+	}
+	if (task4){
+		task4Element.value = task4
+		console.log("task4 value retrieved: ", task4)
+		
+	}
+	if (task5){
+		task5Element.value = task5
+		console.log("task5 value retrieved: ", task5)
+	}
+		
+})
