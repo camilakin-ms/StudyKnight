@@ -1,2 +1,2 @@
 # StudyKnight
-Study helper chrome extension1
+Study helper chrome extension!
