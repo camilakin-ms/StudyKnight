@@ -1,0 +1,222 @@
+@font-face {
+    font-family: vt232;
+    src: url(fonts/VT323/VT323-Regular.ttf);
+}
+
+body{
+    width: 265px;
+    height: 437px; 
+    background-color: #FFE8D4;
+    font-family: vt232;
+    
+}
+
+.border{
+    width: 100%;
+    height: 100%;
+    background-image: url(images/border.png);
+    background-size: 265px 437px;
+}
+
+.timer {
+    width: 211px;
+    height: 59px;
+    background-image: url(images/timer.png);
+    background-size: 211px 59px;
+    transform: translate(28px,-5px);
+    margin: 0;
+}
+
+.buttonText {
+    margin: 0 6px 0 6px;
+    display: inline-block;
+    width: 48px;
+    height: 16px;
+    background-image: url(images/button.png);
+    background-size: 100%;
+    text-align: center;
+    font-size: 11px;
+    color:#FFE8D4;
+    padding-top: 3px;
+    font-family: vt232;
+}
+
+.timerButtons {
+    border: none;
+    text-decoration: none;
+    padding: 0;
+    background-color: #FFE8D4;
+}
+
+.buttonText:hover {
+    background-image:url(images/buttonHover.png);
+    background-size: 100%;
+}
+
+.buttonText:active {
+    background-image:url(images/buttonClick.png);
+    background-size: 100%;
+}
+
+.buttonContainer {
+    transform: translate(38px);
+}
+
+.expBar {
+    width: 211px;
+    height: 11px;
+    background-image: url(images/exp.png);
+    background-size: 100%;
+    transform: translate(28px,5px);
+}
+
+.tasks {
+    width: 211px;
+    height: 132px;
+    background-image: url(images/taskborder.png);
+    background-size: 100%;
+    transform: translate(28px, 7px);
+}
+
+.websiteBlocker {
+    width: 211px;
+    height: 16px;
+
+    transform: translate(28px, 10px);
+}
+
+#title {
+    margin: 0;
+    color: #964E3F;
+    font-size: 32px;
+    transform: translate(55px,20px);
+}
+
+#placeholderTime {
+    font-size: 32px;
+    transform: translate(45px,15px);
+    color:#964E3F;
+}
+
+.expText {
+    font-size: 11px;
+    color: #2C2D4D;
+    margin: 0;
+    display: inline-block;
+}
+
+#updateExp {
+    display: inline-block;
+}
+
+.expTextContainer {
+    transform: translate(41px,6px);
+}
+
+#yourTasks {
+    color:#964E3F;
+    font-size: 13px;
+    transform: translate(75px,6px);
+    margin:0;
+}
+
+.taskText {
+    text-decoration: none;
+    border: none;
+    background-color: #FFE8D4;
+    padding: 0;
+    transform: translate(23px, -5px);
+    width: 65%;
+    font-family: vt232;
+    font-size: 11px;
+}
+
+.taskText::placeholder {
+    font-family: vt232;
+    font-size: 11px;
+    transform: translate(0px, -3px);
+}
+
+.boxes {
+    margin:0;
+    transform: translate(23px, -5px);
+}
+
+#submitTaskBtn {
+    text-decoration: none;
+    border: none;
+    height: 19px;
+    padding-bottom: 6px;
+    transform: translate(77px, -2px);
+    background-color: #FFE8D4;
+}
+
+.game {
+    width: 211px;
+    height: 86px;
+    transform: translate(28px, 13px);
+}
+
+#display {
+    height: 100%;
+    width: 145px;
+    background-image: url(images/displayborder.png);
+    background-size: 100%;
+    margin: 0;
+}
+
+#gear {
+    height: 100%;
+    width: 59px;
+    margin: 0;
+    transform: translate(0px, -43px);
+}
+
+.inline {
+    display: inline-block;
+}
+
+#textInput {
+    height: 100%;
+    width: 182px;
+    background-image: url(images/websitebar.png);
+    background-size: 100%;
+}
+
+#blockerButton {
+    height: 100%;
+    width: 18px;
+    background-color: #FFE8D4;
+    padding-left: 1px;
+    border: none;
+    transform: translate(0px, -1px);
+}
+
+#buttonImage {
+    width: 18px;
+    height: 100%;
+    background-image: url(images/smallbutton.png);
+    background-size: 100%;
+}
+
+#buttonImage:hover {
+    background-image:url(images/smallbuttonHover.png);
+    background-size: 100%;
+}
+
+#buttonImage:active {
+    background-image:url(images/smallbuttonClick.png);
+    background-size: 100%;
+}
+
+.gearBar {
+    width: 100%;
+    height: 14px;
+    background-image: url(images/gearbar.png);
+    background-size: 100%;
+}
+
+.gearType {
+    margin: 0;
+    color:#964E3F
+}
