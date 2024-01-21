@@ -65,7 +65,7 @@ chrome.storage.local.get("xp", function(data) {
 })
 
 //WEBSITE BLOCKER INPUT ELEMENT & BUTTON
-const websiteBlock = document.getElementById("textInput")
+const websiteBlock = document.getElementById("inputForm")
 const websiteBlockButton = document.getElementById("blockerButton")
 
 //TASK ELEMENTS
