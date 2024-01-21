@@ -24,9 +24,9 @@ chrome.runtime.onMessage.addListener(ndata => {
     if (action === "updateLEV"){
         let lpoints = level;
         console.log("Updated Level:", lpoints);
-        displayGif(lpoints);
-        extendBar(lpoints);
         levelElement.innerHTML = level;
+	displayGif(lpoints);
+        extendBar(lpoints);
         
     }
 })
