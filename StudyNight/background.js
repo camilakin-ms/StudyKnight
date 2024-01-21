@@ -1,3 +1,4 @@
+
 let xp; // Declare the variable
 // Check if xp is undefined or empty (empty string)
 if (typeof xp === "undefined" || xp === "") {
@@ -10,19 +11,24 @@ if (typeof level === "undefined" || level === "") {
 
 function sendXP(){
     chrome.runtime.sendMessage({ action: "updateXP", xp });
-    if(xp>250){
+    if(xp < 0){
+        xp = 0;
+    }
+    if(xp >= 250){
         level += 1;
         console.log("level logged", level);
-        xp = 0;
+        xp = xp - 250;
         chrome.notifications.create({
             title:"level up notify",
             message: `You Have Leveled UP! Your new level: ${level}`,
             iconUrl: "./images/smile-big.png",
             type: "basic"
        })
+        
     }
     let updatedXp = xp;
     chrome.storage.local.set({xp: updatedXp});
+    
 }
 const ALARM_JOB_NAME = "CHECK_ALARM"
 
@@ -116,15 +122,28 @@ function clear(){
             console.log("All data in chrome.storage cleared successfully.");
         }
     });
+    
+
 }
 
-chrome.runtime.onMessage.addListener(data => {
-    let {event} = data
+chrome.runtime.onMessage.addListener(ndata => {
+    let {event} = ndata
     if(event == 'resetClick'){
+        //console.log("Reset Clicked")
         clear();
+        //clearData();
+        //clearData();
+    }
+    if(event == 'restClick'){
+        handleRest();
     }
 
 })
+
+let handleRest = () => {
+    console.log("Rest Active")
+    stopAlarm();
+}
 
 chrome.runtime.onMessage.addListener(data=> { //listens to submit tasks button
     let {event, tasks} = data

@@ -13,8 +13,8 @@ chrome.runtime.onMessage.addListener(data => {
 
 chrome.storage.local.get("xp", function(data) {
     const xpValue = data.xp !== undefined ? data.xp : 0;
-    xpElement("XP").textContent = xpValue;
-    console.log("xp loaded", xp);
+    xpElement.textContent = xpValue
+    console.log("xp loaded", data.xp);
 })
 
 
@@ -38,6 +38,7 @@ const checkboxes = [check1Element, check2Element, check3Element, check4Element, 
 //BUTTONS
 const submitTasksButton = document.getElementById("submitTaskBtn")
 const resetButton = document.getElementById("reset")
+const restButton = document.getElementById("rest")
 
 //BUTTON TO SUBMIT TASKS
 submitTasksButton.onclick = () => {
@@ -53,6 +54,9 @@ submitTasksButton.onclick = () => {
 
 resetButton.onclick = () => {
     chrome.runtime.sendMessage({event: 'resetClick'})
+}
+restButton.onclick = () =>  {
+    chrome.runtime.sendMessage({event: 'restClick'})
 }
 
 
