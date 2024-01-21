@@ -283,4 +283,7 @@ function clearData() {
 }
 //clear points
 
+// listens to website button click WORKING HERE AFTER INPUT SETUP
+//chrome.runtime.onMessage.addListener('websiteBlockClick')()
+
 
