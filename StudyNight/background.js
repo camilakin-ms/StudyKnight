@@ -1,13 +1,14 @@
-let xp;
-if (!xp || xp.trim() === "") {
-    xp = 0;
+let xp; // Declare the variable
+// Check if xp is undefined or empty (empty string)
+if (typeof xp === "undefined" || xp === "") {
+    xp = 0; // Set it to zero
 }
 
 function sendXP(){
     chrome.runtime.sendMessage({ action: "updateXP", xp });
+    let updatedXp = xp;
+    chrome.storage.local.set({xp: updatedXp});
 }
-//chrome.storage.local.set(xp)
-
 const ALARM_JOB_NAME = "CHECK_ALARM"
 
 const createAlarm = () => {
@@ -61,8 +62,9 @@ chrome.alarms.onAlarm.addListener(() => {
       			
       			if (isMatch) {
       				console.log("URL matched with predefined URL: ", tabUrl);
-                    xp += 1
-                    chrome.storage.local.set(xp)
+                    xp += 1;
+                    sendXP()
+                    
     			} else {
      				 console.log("URL did not match any predefined URL.");
     				} 
@@ -91,33 +93,53 @@ let handleTaskSubmit = (tasks) => { //logs tasks input upon button pressed
 chrome.runtime.onMessage.addListener(data => { //listens to checkboxes
     if(data.event === 'checked1'){
         console.log("checklist 1 IS CHECKED")
+        xp += 100;
+        sendXP();
     }
     if(data.event === 'unchecked1'){
         console.log("checklist 1 IS UNCHECKED")
+        xp -= 100;
+        sendXP();
     }
     if(data.event === 'checked2'){
         console.log("checklist 2 IS CHECKED")
+        xp += 100;
+        sendXP();
     }
     if(data.event === 'unchecked2'){
         console.log("checklist 2 IS UNCHECKED")
+        xp -= 100;
+        sendXP();
     }
     if(data.event === 'checked3'){
         console.log("checklist 3 IS CHECKED")
+        xp += 100;
+        sendXP();
     }
     if(data.event === 'unchecked3'){
         console.log("checklist 3 IS UNCHECKED")
+        xp -= 100;
+        sendXP();
     }
     if(data.event === 'checked4'){
         console.log("checklist 4 IS CHECKED")
+        xp += 100;
+        sendXP();
     }
     if(data.event === 'unchecked4'){
         console.log("checklist 4 IS UNCHECKED")
+        xp -= 100;
+        sendXP();
     }
     if(data.event === 'checked5'){
         console.log("checklist 5 IS CHECKED")
+        xp += 100;
+        sendXP();
     }
     if(data.event === 'unchecked5'){
         console.log("checklist 5 IS UNCHECKED")
+        xp -= 100;
+        sendXP();
     }
 })
 

@@ -1,15 +1,20 @@
 //XP ELEMENT
-let xPoints;
-if (!xPoints || xPoints.trim() === "") {
-    xPoints = 0;
-}
+let xpElement = document.getElementById("XP")
 
 chrome.runtime.onMessage.addListener(data => {
     let {action,xp} = data;
     if (action === "updateXP"){
-        xPoints = xp;
+        let xPoints = xp;
         console.log("Updated xp points: ", xPoints)
+        xpElement.innerHTML = xPoints;
+        
     }
+})
+
+chrome.storage.local.get("xp", function(data) {
+    const xpValue = data.xp !== undefined ? data.xp : 0;
+    xpElement("XP").textContent = xpValue
+    console.log("xp loaded", xp);
 })
 
 
@@ -45,37 +50,36 @@ submitTasksButton.onclick = () => {
     chrome.runtime.sendMessage({event: 'tasksSubmitted', tasks})
 }
 
-//ADDS 100 POINTS FOR TASK CHECKED
-function add100(){
-    xpElement += 100;
-    document.getElementById("XP").innerHTML = xpElement;
-    console.log("Current XP: ", xpElement)
-}
-//TAKES AWAY 100 POINTS FOR TASK UNCHECKED
-function sub100() {
-    xpElement -= 100;
-    document.getElementById("XP").innerHTML = xpElement;
-    console.log("Current XP: ", xpElement)
-}
 
 
 function handleCheckboxClick(index) { return () => { //sends message to background.js for checked/unchecked boxes
         const checkedEvent = `checked${index + 1}`;
         const uncheckedEvent = `unchecked${index + 1}`;
+        const isChecked = checkboxes[index].checked;
 
-        if (checkboxes[index].checked) {
+        if (isChecked) {
             chrome.runtime.sendMessage({ event: checkedEvent });
-            add100();
         } else {
             chrome.runtime.sendMessage({ event: uncheckedEvent });
-            sub100();
         }
+        const boxState = {};
+        boxState[index] = isChecked;
+        chrome.storage.local.set(boxState);
     };
 }
 
 checkboxes.forEach((checkbox, index) => {
     checkbox.onclick = handleCheckboxClick(index);
 });
+
+chrome.storage.local.get(null, function(data) {
+    Object.entries(data).forEach(([index, value]) => {
+        if (checkboxes[index]) {
+            checkboxes[index].checked = value;
+        }
+    });
+});
+
 
 
 //storage
