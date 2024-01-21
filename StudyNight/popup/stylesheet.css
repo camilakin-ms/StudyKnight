@@ -160,7 +160,7 @@ body{
 #display {
     height: 100%;
     width: 145px;
-    background-image: url(images/displayborder.png);
+    background-image: url(images/background.gif);
     background-size: 100%;
     margin: 0;
 }
