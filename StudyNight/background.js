@@ -24,7 +24,23 @@ function sendXP(){
     if(xp >= 250){
         level += 1;
         levelUp();
+    }/*else {
+            let percentage = (xp *0.4); // Calculate the percentage based on XP and a maximum of 250 XP
+            if (percentage > 100) {
+                percentage = 100; // Ensure the percentage doesn't exceed 100%
+            }
+        
+            // Set the width of the XP bar element
+            var xpBarElement = document.getElementById("fillBar");
+            if (xpBarElement) {
+                xpBarElement.style.width = percentage + "%";
+            }
+        }}
+    /*else{
+        let percentage =  ( xp * 0.4 );
+        Element.style.width = percentage + '%';
     }
+    */
     let updatedXp = xp;
     chrome.storage.local.set({xp: updatedXp});
 }
@@ -166,6 +182,8 @@ chrome.alarms.onAlarm.addListener((alarm) => {
             iconUrl: "popup/images/icon.png",
             type: "basic"
        })
+       xp += 30;
+       sendXP()
     }
 
 });
@@ -189,6 +207,7 @@ chrome.runtime.onMessage.addListener(ndata => {
 })
 
 let handleStart =() => {
+    console.log("start Active")
     createAlarm2()
     createAlarm1()
 }

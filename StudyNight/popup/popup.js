@@ -1,3 +1,4 @@
+
 //XP ELEMENT
 let xpElement = document.getElementById("XP")
 
@@ -20,6 +21,7 @@ chrome.runtime.onMessage.addListener(ndata => {
         let lpoints = level;
         console.log("Updated Level:", lpoints);
         displayGif(lpoints);
+        extendBar(lpoints);
         //xpElement.innerHTML = level;   place level
         
     }
@@ -27,7 +29,7 @@ chrome.runtime.onMessage.addListener(ndata => {
 
 chrome.storage.local.get("level", function(data) {
     const levValue = data.xp !== undefined ? data.level : 0;
-    //xpElement.textContent = levValue
+    //levelElement.textContent = levValue
     console.log("level loaded", data.level);
 })
 
@@ -37,6 +39,17 @@ chrome.runtime.onMessage.addListener(data => {
         let xPoints = xp;
         console.log("Updated xp points: ", xPoints)
         xpElement.innerHTML = xPoints;
+
+        let percentage = (xPoints *0.4); // Calculate the percentage based on XP and a maximum of 250 XP
+            if (percentage > 100) {
+                percentage = 100; // Ensure the percentage doesn't exceed 100%
+            }
+    
+        // Set the width of the XP bar element
+        var xpBarElement = document.getElementById("fillBar");
+        if (xpBarElement) {
+            xpBarElement.style.width = percentage + "%";
+        }
         
     }
 })
@@ -109,6 +122,7 @@ restButton.onclick = () =>  {
 }
 startButton.onclick = () => {
     chrome.runtime.sendMessage({event: 'startClick'})
+    //displayGif(levValue);
 }
 
 websiteBlockButton.onclick = () => {                    //submit website block button HERE HERE IM WORKING HERE AFTER INPUT SETUP
@@ -191,8 +205,35 @@ chrome.storage.local.get(["task1","task2","task3","task4","task5"], (result) =>{
 		
 })
 
+const gearBar = {
+    5: "fillOne" ,
+    10: "fillTwo" ,
+    15: "fillThree" ,
+    20: "fillFour" ,
+    25: "fillFive" ,
+};
+
+function extendBar(level) {
+    console.log("Gear Extend");
+    const gear = gearBar[level];
+    if (gear) {
+        console.log("Gear Extend");
+        const displayElement = document.getElementById(gear);
+        if (displayElement) {
+            displayElement.style.opacity = "1";
+        } else {
+            console.log("Display element not found for gear: " + gear);
+        }
+    } else {
+        console.log("No gear found for level: " + level);
+    }
+    
+}
+
+
 const levelGifs = {
-    5: 'gifs/background1.gif' ,
+    //1: 'gifs/background1.gif' ,
+    5: 'gifs/backgroundSword1.gif' ,
     10: 'gifs/backgroundSword2.gif' ,
     15: 'gifs/backgroundSword3.gif' ,
     20: 'gifs/backgroundSword4.gif' ,
