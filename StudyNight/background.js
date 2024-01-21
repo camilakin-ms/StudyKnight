@@ -24,23 +24,7 @@ function sendXP(){
     if(xp >= 250){
         level += 1;
         levelUp();
-    }/*else {
-            let percentage = (xp *0.4); // Calculate the percentage based on XP and a maximum of 250 XP
-            if (percentage > 100) {
-                percentage = 100; // Ensure the percentage doesn't exceed 100%
-            }
-        
-            // Set the width of the XP bar element
-            var xpBarElement = document.getElementById("fillBar");
-            if (xpBarElement) {
-                xpBarElement.style.width = percentage + "%";
-            }
-        }}
-    /*else{
-        let percentage =  ( xp * 0.4 );
-        Element.style.width = percentage + '%';
     }
-    */
     let updatedXp = xp;
     chrome.storage.local.set({xp: updatedXp});
 }
@@ -94,7 +78,7 @@ const stopAlarm1 = () => {
 	chrome.alarms.clear(ALARM_JOB_NAME);
 }
 
-//i have tabTitel and tabUrl
+//i have tabTitle and tabUrl
 function queeryTabs(callback){
 	let queryOptions = {active: true, lastFocusedWindow: true};
 	
@@ -123,14 +107,14 @@ function queeryTabs(callback){
 //predefined url's
 const linksList = [
 "https://www.concordia.ca/",
-    "https://concordia.udemy.com/organization/home/",
-    "https://en.wikipedia.org/wiki/Main_Page",
+    "https://concordia.udemy.com/",
+    "https://en.wikipedia.org/",
     "https://library.concordia.ca/",
     "https://scholar.google.com/",
     "https://ca.linkedin.com/",
     "https://www.jstor.org/",
-    "https://moodle.concordia.ca/moodle/?redirect=0",
-    "https://github.com/dashboard",
+    "https://moodle.concordia.ca/moodle/",
+    "https://github.com/",
     "https://www.khanacademy.org/",
     "https://www.canva.com/",
     "https://docs.google.com/",
@@ -144,6 +128,20 @@ const linksList = [
     "https://mail.google.com/",
     "https://calendar.google.com/"
 	];
+
+// here add 'bad' submitted links (call from storage) and assign it to an array
+let badList = [];
+let counter = 0;
+chrome.runtime.onMessage.addListener((data) => {
+    let {event, inputWebsite} = data
+    if(event === 'websiteBlockClick'){
+    console.log("bad website received", inputWebsite);
+    badList.push(inputWebsite); //error
+    console.log("website added to badList: ", badList[counter])
+    counter++
+    }
+})
+
 
 //ALARMS    
 
@@ -159,13 +157,19 @@ chrome.alarms.onAlarm.addListener((alarm) => {
       			    const tabUrl = tabInfo.url; 
       			
       			    const isMatch = linksList.some(predefinedUrl => tabUrl.includes(predefinedUrl));
-      			
+                    const isMatchBad = badList.some(predefinedUrl => tabUrl.includes(predefinedUrl));
       			    if (isMatch) {
       				    console.log("URL matched with predefined URL: ", tabUrl);
                         xp += 1;
                         sendXP()
                     
-    			    } else {
+    			    } 
+                    else if(isMatchBad){
+                        console.log("Bad URL detected: ", tabUrl);
+                        xp -=1;
+                        sendXP()
+                    }
+                    else {
      				    console.log("URL did not match any predefined URL.");
     				} 
 		    }else{
@@ -178,17 +182,13 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         console.log("ALARM 2");
         chrome.notifications.create({
             title:"30 min marker",
-            message: '30 minutes passed, keep it up',
+            message: '30 minutes working, keep it up!',
             iconUrl: "popup/images/icon.png",
             type: "basic"
        })
-       xp += 30;
-       sendXP()
     }
 
 });
-
-
 
 
 chrome.runtime.onMessage.addListener(ndata => {
@@ -302,7 +302,5 @@ function clearData() {
 }
 //clear points
 
-// listens to website button click WORKING HERE AFTER INPUT SETUP
-//chrome.runtime.onMessage.addListener('websiteBlockClick')()
 
 
