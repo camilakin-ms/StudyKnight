@@ -16,7 +16,8 @@
         "storage",
         "alarms",
         "activeTab",
-        "tabs"
+        "tabs",
+		"notifications"
         
     ]
 }

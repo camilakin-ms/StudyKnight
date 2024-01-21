@@ -3,9 +3,24 @@ let xp; // Declare the variable
 if (typeof xp === "undefined" || xp === "") {
     xp = 0; // Set it to zero
 }
+let level;
+if (typeof level === "undefined" || level === "") {
+    level = 1; // Set it to zero
+}
 
 function sendXP(){
     chrome.runtime.sendMessage({ action: "updateXP", xp });
+    if(xp>250){
+        level += 1;
+        xp = 0;
+        chrome.storage.local.set(xp) //might want ot change to clear xp
+        chrome.notifications.create({
+            title:"Global Enttry Drops",
+            message: `You Have Leveled UP! Your new level: ${level}`,
+             iconUrl: "./images/smile-big.png",
+             type: "basic"
+       })
+    }
     let updatedXp = xp;
     chrome.storage.local.set({xp: updatedXp});
 }
@@ -74,7 +89,23 @@ chrome.alarms.onAlarm.addListener(() => {
 	});
 });
 
+function clear(){
+    chrome.storage.local.clear(function() {
+        if (chrome.runtime.lastError) {
+            console.error(chrome.runtime.lastError);
+        } else {
+            console.log("All data in chrome.storage cleared successfully.");
+        }
+    });
+}
 
+chrome.runtime.onMessage.addListener(data => {
+    let {event} = data
+    if(event == 'resetClick'){
+        clear();
+    }
+
+})
 
 chrome.runtime.onMessage.addListener(data=> { //listens to submit tasks button
     let {event, tasks} = data
@@ -158,5 +189,6 @@ function clearData() {
     task5Element.value = "";
   });
 }
+//clear points
 
 

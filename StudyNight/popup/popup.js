@@ -37,6 +37,7 @@ const checkboxes = [check1Element, check2Element, check3Element, check4Element, 
 
 //BUTTONS
 const submitTasksButton = document.getElementById("submitTaskBtn")
+const resetButton = document.getElementById("reset")
 
 //BUTTON TO SUBMIT TASKS
 submitTasksButton.onclick = () => {
@@ -48,6 +49,10 @@ submitTasksButton.onclick = () => {
         task5: task5Element.value,
     } 
     chrome.runtime.sendMessage({event: 'tasksSubmitted', tasks})
+}
+
+resetButton.onclick = () => {
+    chrome.runtime.sendMessage({event: 'resetClick'})
 }
 
 
