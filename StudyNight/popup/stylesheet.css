@@ -287,6 +287,17 @@ body{
     opacity: 0;
 }
 
+#pauseScreen {
+    position: absolute;
+    width: 211px;
+    height: 124px;
+    background-image: url(images/background.png);
+    background-size: 100%;
+    transform: translate(28px, -169px);
+    opacity: 100%;
+}
+
+
 #fillFive {
     width: 6.5px;
     transform: translate(96px, 24.25px);
