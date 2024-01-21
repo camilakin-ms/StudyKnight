@@ -1,3 +1,13 @@
+let xp;
+if (!xp || xp.trim() === "") {
+    xp = 0;
+}
+
+function sendXP(){
+    chrome.runtime.sendMessage({ action: "updateXP", xp });
+}
+//chrome.storage.local.set(xp)
+
 const ALARM_JOB_NAME = "CHECK_ALARM"
 
 const createAlarm = () => {
@@ -45,12 +55,14 @@ chrome.alarms.onAlarm.addListener(() => {
 		if(tabInfo) {
 			console.log("T'sss")
 			const tabTitle = tabInfo.title;
-      			const tabUrl = tabInfo.url;
+      			const tabUrl = tabInfo.url; 
       			
       			const isMatch = linksList.includes(tabUrl);
       			
       			if (isMatch) {
       				console.log("URL matched with predefined URL: ", tabUrl);
+                    xp += 1
+                    chrome.storage.local.set(xp)
     			} else {
      				 console.log("URL did not match any predefined URL.");
     				} 

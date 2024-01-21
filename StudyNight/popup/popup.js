@@ -1,5 +1,18 @@
 //XP ELEMENT
-let xpElement = 0
+let xPoints;
+if (!xPoints || xPoints.trim() === "") {
+    xPoints = 0;
+}
+
+chrome.runtime.onMessage.addListener(data => {
+    let {action,xp} = data;
+    if (action === "updateXP"){
+        xPoints = xp;
+        console.log("Updated xp points: ", xPoints)
+    }
+})
+
+
 
 //TASK ELEMENTS
 const task1Element = document.getElementById("task1")
@@ -63,6 +76,7 @@ function handleCheckboxClick(index) { return () => { //sends message to backgrou
 checkboxes.forEach((checkbox, index) => {
     checkbox.onclick = handleCheckboxClick(index);
 });
+
 
 //storage
 chrome.storage.local.get(["task1","task2","task3","task4","task5"], (result) =>{
