@@ -32,7 +32,7 @@ chrome.runtime.onMessage.addListener(ndata => {
 })
 
 chrome.storage.local.get("level", function(data) {
-    const levValue = data.xp !== undefined ? data.level : 1;
+    const levValue = data.level !== undefined ? data.level : 1;
     levelElement.innerHTML = levValue
     console.log("level loaded", data.level);
 })
