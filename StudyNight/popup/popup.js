@@ -121,11 +121,12 @@ resetButton.onclick = () => {
     resetCheckboxes();
 }
 restButton.onclick = () =>  {
-    
+    document.getElementById("pauseScreen").style.opacity = "1";
     chrome.runtime.sendMessage({event: 'restClick'})
 }
 startButton.onclick = () => {
-    chrome.runtime.sendMessage({event: 'startClick'})
+	document.getElementById("pauseScreen").style.opacity = "0";
+    	chrome.runtime.sendMessage({event: 'startClick'})
     //displayGif(levValue);
 }
 
