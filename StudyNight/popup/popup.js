@@ -14,6 +14,23 @@ function updateClock(){
 //updateClock();
 setInterval(updateClock, 1000);
 
+chrome.runtime.onMessage.addListener(ndata => {
+    let {action, level} = ndata;
+    if (action === "updateLEV"){
+        let lpoints = level;
+        console.log("Updated Level:", lpoints);
+        displayGif(lpoints);
+        //xpElement.innerHTML = level;   place level
+        
+    }
+})
+
+chrome.storage.local.get("level", function(data) {
+    const levValue = data.xp !== undefined ? data.level : 0;
+    //xpElement.textContent = levValue
+    console.log("level loaded", data.level);
+})
+
 chrome.runtime.onMessage.addListener(data => {
     let {action,xp} = data;
     if (action === "updateXP"){
@@ -67,10 +84,26 @@ submitTasksButton.onclick = () => {
     chrome.runtime.sendMessage({event: 'tasksSubmitted', tasks})
 }
 
+
 resetButton.onclick = () => {
     chrome.runtime.sendMessage({event: 'resetClick'})
+    task1Element.value = "";
+    task2Element.value = "";
+    task3Element.value = "";
+    task4Element.value = "";
+    task5Element.value = "";
+    const tasks = {
+        task1: task1Element.value,
+        task2: task2Element.value,
+        task3: task3Element.value,
+        task4: task4Element.value,
+        task5: task5Element.value,
+    } 
+    chrome.runtime.sendMessage({event: 'tasksSubmitted', tasks})
+    resetCheckboxes();
 }
 restButton.onclick = () =>  {
+    
     chrome.runtime.sendMessage({event: 'restClick'})
 }
 startButton.onclick = () => {
@@ -78,7 +111,7 @@ startButton.onclick = () => {
 }
 
 
-
+//check and save 1
 function handleCheckboxClick(index) { return () => { //sends message to background.js for checked/unchecked boxes
         const checkedEvent = `checked${index + 1}`;
         const uncheckedEvent = `unchecked${index + 1}`;
@@ -95,6 +128,7 @@ function handleCheckboxClick(index) { return () => { //sends message to backgrou
     };
 }
 
+//takes and saves
 checkboxes.forEach((checkbox, index) => {
     checkbox.onclick = handleCheckboxClick(index);
 });
@@ -106,6 +140,21 @@ chrome.storage.local.get(null, function(data) {
         }
     });
 });
+
+//checck and undo
+function resetCheckboxes() {
+    const boxState = {};
+    checkboxes.forEach((checkbox, index) => {
+        checkbox.checked = false; // Uncheck all checkboxes
+        boxState[index] = false; // Update the storage state
+    });
+    
+    // Save the updated checkbox states to chrome.storage.local
+    chrome.storage.local.set(boxState, () => {
+        console.log("Checkbox states reset.");
+    });
+}
+
 
 
 
@@ -136,7 +185,33 @@ chrome.storage.local.get(["task1","task2","task3","task4","task5"], (result) =>{
 		
 })
 
+const levelGifs = {
+    5: 'gifs/background1.gif' ,
+    10: 'gifs/backgroundSword2.gif' ,
+    15: 'gifs/backgroundSword3.gif' ,
+    20: 'gifs/backgroundSword4.gif' ,
+    25: 'gifs/backgroundSword5.gif' ,
 
+}
+
+function displayGif(level){
+    console.log("attempted display gif");
+    const gif = levelGifs[level];
+    const displayElement = document.getElementById("display");
+    if(gif){
+        displayElement.style.backgroundImage = `url(${gif})`;
+        updateLevelAndBackground(level, gif)
+    }
+}
+function updateLevelAndBackground(level, gif) {
+    chrome.storage.local.set({ level, gif });
+}
+chrome.storage.local.get(['level', 'gif'], function(data) {
+    const { level, gif } = data;
+    if (level && gif) {
+        displayGif(level);
+    }
+});
 
 
 
