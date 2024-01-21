@@ -222,6 +222,7 @@ function extendBar(level) {
         const displayElement = document.getElementById(gear);
         if (displayElement) {
             displayElement.style.opacity = "1";
+		updateLevelAndBar(level, gear)
         } else {
             console.log("Display element not found for gear: " + gear);
         }
@@ -230,6 +231,17 @@ function extendBar(level) {
     }
     
 }
+
+function updateLevelAndBar(level, gear) {
+    chrome.storage.local.set({ level, gear });
+}
+chrome.storage.local.get(['level', 'gear'], function(data) {
+    const { level, gear } = data;
+    if (level && gear) {
+        extendBar(level);
+    }
+}); 
+
 
 
 const levelGifs = {
