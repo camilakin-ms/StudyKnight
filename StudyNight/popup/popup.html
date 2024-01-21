@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyKnight</title>
+    <link rel="icon" href="images/icon.png" type="image/icon">
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
@@ -12,16 +13,20 @@
             <h1 id = "title"> Study Knight </h1>
         </div>
         <div class = "timer">
-            <p id = "clock">00:00:00</p>
+            <p id = "placeholderTime">00:00:00</p>
         </div>
         <div class = "buttonContainer">
                 <button type = "button" class = "timerButtons"><p class = "buttonText" id = "start">start</p></button>
                 <button type = "button" class = "timerButtons"><p class = "buttonText" id = "rest">rest</p></button>
                 <button type = "button" class = "timerButtons"><p class = "buttonText" id = "reset">reset</p></button>
         </div>
-            <div class = "expText">exp: <div class = "expText" id="XP">0</div> / 250</div>
+        <div class ="expTextContainer">
+            <div class = "expText">exp: <div class = "expText" id="XP">0</div> / 250 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</div><div class = "expText">level:</div><div class = "expText" id="levelID">1</div>
+        </div>
         <div class = "expBar">
-
+            <div id ="fillBarCon">
+                <div id ="fillBar"></div>
+            </div>
         </div>
         <div class = "tasks">
             <form>
@@ -41,16 +46,24 @@
             </form>
         </div>
         <div class = "websiteBlocker">
-            <span class ="inline" id = "textInput"></span>
-            <button class = "inline" type = "button" id = "blockerButton"><div id="buttonImage"></div></button>
+            <span class ="inline" id = "textInput">
+                <form id="websiteForm">
+                    <input class ="inline" type="text" id = "inputForm" placeholder="block a website!">
+                    <button type="submit" id="blockerButton" class="inline"><div id="buttonImage"></div></button>
+                </form>
+            </span>
         </div>
         <div class = "game">
             <span class = "inline" id = "display"></span>
             <span class = "inline" id = "gear">
-                <p class = "gearType">armor :</p>
-                <div class = "gearBar" id = "armor"></div>
                 <p class = "gearType">weapon :</p>
-                <div class = "gearBar" id = "weapon"></div>
+                <div class = "gearBar" id = "weapon">
+                    <sdiv class = "fill" id="fillOne"></div>
+                    <div class = "fill" id="fillTwo"></div>
+                    <div class = "fill" id="fillThree"></div>
+                    <div class = "fill" id="fillFour"></div>
+                    <div class = "fill" id="fillFive"></div>
+                </div>
             </span>
         </div>
     </div>
