@@ -61,8 +61,27 @@ function queeryTabs(callback){
 }
 //predefined url's
 const linksList = [
-	"https://www.youtube.com/",
-	"https://www.facebook.com/"
+"https://www.concordia.ca/",
+    "https://concordia.udemy.com/organization/home/",
+    "https://en.wikipedia.org/wiki/Main_Page",
+    "https://library.concordia.ca/",
+    "https://scholar.google.com/",
+    "https://ca.linkedin.com/",
+    "https://www.jstor.org/",
+    "https://moodle.concordia.ca/moodle/?redirect=0",
+    "https://github.com/dashboard",
+    "https://www.khanacademy.org/",
+    "https://www.canva.com/",
+    "https://docs.google.com/",
+    "https://drive.google.com/",
+    "https://www.duolingo.com/",
+    "https://webwork.concordia.ca/",
+    "https://www.mathway.com",
+    "https://www.symbolab.com",
+    "https://www.integral-calculator.com",
+    "https://archive.org",
+    "https://mail.google.com/",
+    "https://calendar.google.com/"
 	];
 
 chrome.alarms.onAlarm.addListener(() => {
@@ -73,7 +92,7 @@ chrome.alarms.onAlarm.addListener(() => {
 			const tabTitle = tabInfo.title;
       			const tabUrl = tabInfo.url; 
       			
-      			const isMatch = linksList.includes(tabUrl);
+      			const isMatch = linksList.some(predefinedUrl => tabUrl.includes(predefinedUrl));
       			
       			if (isMatch) {
       				console.log("URL matched with predefined URL: ", tabUrl);
