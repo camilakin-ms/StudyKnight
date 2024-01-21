@@ -8,7 +8,7 @@ function updateClock(){
     const m = cTime.getMinutes();
     const s = cTime.getSeconds();
 
-    const formattedTime = `${h}:${m}:${s}`;
+    const formattedTime = `${h<10 ? `0` : ``}${h}:${m<10 ? `0` : ``}${m}:${s<10 ? `0` : ``}${s}`;
     clockElement.innerHTML = formattedTime;
 }
 //updateClock();
