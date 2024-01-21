@@ -1,6 +1,19 @@
 //XP ELEMENT
 let xpElement = document.getElementById("XP")
 
+function updateClock(){
+    const clockElement = document.getElementById("clock")
+    const cTime = new Date();
+    const h = cTime.getHours();
+    const m = cTime.getMinutes();
+    const s = cTime.getSeconds();
+
+    const formattedTime = `${h}:${m}:${s}`;
+    clockElement.innerHTML = formattedTime;
+}
+//updateClock();
+setInterval(updateClock, 1000);
+
 chrome.runtime.onMessage.addListener(data => {
     let {action,xp} = data;
     if (action === "updateXP"){
@@ -18,7 +31,7 @@ chrome.storage.local.get("xp", function(data) {
 })
 
 //CLOCK ELEMENT
-const clockElement = document.getElementById("clock")
+
 
 //TASK ELEMENTS
 const task1Element = document.getElementById("task1")
@@ -123,16 +136,8 @@ chrome.storage.local.get(["task1","task2","task3","task4","task5"], (result) =>{
 		
 })
 
-function updateClock(){
-    const cTime = new Date();
-    const h = cTime.getHours();
-    const m = cTime.getMinutes();
-    const s = cTime.getMinutes();
 
-    const formattedTime = `${hours}:${minutes}:${seconds}`;
-    clockElement.innerHTML = formattedTime;
-}
 
-setInterval(updateClock, 1000);
 
-updateClock();
+
+//updateClock();
