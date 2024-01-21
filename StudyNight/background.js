@@ -13,7 +13,7 @@ function sendLev(){
     chrome.runtime.sendMessage({ action: "updateLEV", level });
     let updatedLev = level
     chrome.storage.local.set({level: updatedLev});
-    console.log("level log");
+    console.log("LEVEL SENT");
 }
 
 function sendXP(){
@@ -23,21 +23,42 @@ function sendXP(){
     }
     if(xp >= 250){
         level += 1;
-        sendLev();
-        console.log("level logged", level);
-        xp = xp - 250;
-        chrome.notifications.create({
-            title:"level up notify",
-            message: `You Have Leveled UP! Your new level: ${level}`,
-            iconUrl: "./images/smile-big.png",
-            type: "basic"
-       })
-        
+        levelUp();
     }
     let updatedXp = xp;
     chrome.storage.local.set({xp: updatedXp});
-    
 }
+
+function levelUp() {
+    sendLev();
+    console.log("level logged", level);
+    xp = xp - 250;
+    if(level%5 === 0 && level < 50){
+        chrome.notifications.create({
+            title:"level up notify: unlock item",
+            message: `Level UP: ${level}! YOU HAVE UNLOCKED AN ITEM`,
+            iconUrl: "./images/smile-big.png",
+            type: "basic"
+        })
+    }
+    else if(level == 50){
+        chrome.notifications.create({
+            title:"win notify",
+            message: `***** YOU WON!! *****`,
+            iconUrl: "./images/smile-big.png",
+            type: "basic"
+        })
+    }
+    else{
+        chrome.notifications.create({
+            title:"level up notify",
+            message: `Level UP: ${level}! Advance more levels to unlock an item.`,
+            iconUrl: "./images/smile-big.png",
+            type: "basic"
+        })
+    }
+}
+
 const ALARM_JOB_NAME = "CHECK_ALARM"
 const ALARM_NAME_2 = "TIME_ALARM"
 
