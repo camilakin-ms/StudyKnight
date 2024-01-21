@@ -33,7 +33,7 @@ function levelUp() {
     sendLev();
     console.log("level logged", level);
     xp = xp - 250;
-    if(level%5 === 0 && level < 50){
+    if(level%5 === 0 && level < 25){
         chrome.notifications.create({
             title:"level up notify: unlock item",
             message: `Level UP: ${level}! YOU HAVE UNLOCKED AN ITEM`,
@@ -41,7 +41,7 @@ function levelUp() {
             type: "basic"
         })
     }
-    else if(level == 50){
+    else if(level === 25){
         chrome.notifications.create({
             title:"win notify",
             message: `***** YOU WON!! *****`,
