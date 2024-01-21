@@ -12,13 +12,13 @@ function sendXP(){
     chrome.runtime.sendMessage({ action: "updateXP", xp });
     if(xp>250){
         level += 1;
+        console.log("level logged", level);
         xp = 0;
-        chrome.storage.local.set(xp) //might want ot change to clear xp
         chrome.notifications.create({
-            title:"Global Enttry Drops",
+            title:"level up notify",
             message: `You Have Leveled UP! Your new level: ${level}`,
-             iconUrl: "./images/smile-big.png",
-             type: "basic"
+            iconUrl: "./images/smile-big.png",
+            type: "basic"
        })
     }
     let updatedXp = xp;
