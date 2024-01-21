@@ -113,7 +113,7 @@ const linksList = [
     "https://scholar.google.com/",
     "https://ca.linkedin.com/",
     "https://www.jstor.org/",
-    "https://moodle.concordia.ca/moodle/",
+    "https://moodle.concordia.ca/",
     "https://github.com/",
     "https://www.khanacademy.org/",
     "https://www.canva.com/",
