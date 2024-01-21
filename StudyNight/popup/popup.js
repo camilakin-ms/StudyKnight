@@ -47,8 +47,9 @@ chrome.storage.local.get("xp", function(data) {
     console.log("xp loaded", data.xp);
 })
 
-//CLOCK ELEMENT
-
+//WEBSITE BLOCKER INPUT ELEMENT & BUTTON
+const websiteBlock = document.getElementById("textInput")
+const websiteBlockButton = document.getElementById("blockerButton")
 
 //TASK ELEMENTS
 const task1Element = document.getElementById("task1")
@@ -110,6 +111,11 @@ startButton.onclick = () => {
     chrome.runtime.sendMessage({event: 'startClick'})
 }
 
+websiteBlockButton.onclick = () => {                    //submit website block button HERE HERE IM WORKING HERE AFTER INPUT SETUP
+    let inputWebsite = websiteBlock.value;
+    console.log("blocked website logged: ", inputWebsite)
+    chrome.runtime.sendMessage({event: 'websiteBlockClick', inputWebsite})
+}
 
 //check and save 1
 function handleCheckboxClick(index) { return () => { //sends message to background.js for checked/unchecked boxes
