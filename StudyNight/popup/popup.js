@@ -17,7 +17,8 @@ chrome.storage.local.get("xp", function(data) {
     console.log("xp loaded", data.xp);
 })
 
-
+//CLOCK ELEMENT
+const clockElement = document.getElementById("clock")
 
 //TASK ELEMENTS
 const task1Element = document.getElementById("task1")
@@ -39,6 +40,7 @@ const checkboxes = [check1Element, check2Element, check3Element, check4Element, 
 const submitTasksButton = document.getElementById("submitTaskBtn")
 const resetButton = document.getElementById("reset")
 const restButton = document.getElementById("rest")
+const startButton = document.getElementById("start")
 
 //BUTTON TO SUBMIT TASKS
 submitTasksButton.onclick = () => {
@@ -57,6 +59,9 @@ resetButton.onclick = () => {
 }
 restButton.onclick = () =>  {
     chrome.runtime.sendMessage({event: 'restClick'})
+}
+startButton.onclick = () => {
+    chrome.runtime.sendMessage({event: 'startClick'})
 }
 
 
@@ -117,3 +122,17 @@ chrome.storage.local.get(["task1","task2","task3","task4","task5"], (result) =>{
 	}
 		
 })
+
+function updateClock(){
+    const cTime = new Date();
+    const h = cTime.getHours();
+    const m = cTime.getMinutes();
+    const s = cTime.getMinutes();
+
+    const formattedTime = `${hours}:${minutes}:${seconds}`;
+    clockElement.innerHTML = formattedTime;
+}
+
+setInterval(updateClock, 1000);
+
+updateClock();

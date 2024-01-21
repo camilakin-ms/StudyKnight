@@ -137,8 +137,15 @@ chrome.runtime.onMessage.addListener(ndata => {
     if(event == 'restClick'){
         handleRest();
     }
+    if(event == 'startClick'){
+        handleStart();
+    }
 
 })
+
+let handleStart =() => {
+    createAlarm();
+}
 
 let handleRest = () => {
     console.log("Rest Active")
@@ -156,7 +163,7 @@ let handleTaskSubmit = (tasks) => { //logs tasks input upon button pressed
     console.log("Tasks received in background.");
     console.log("Tasks received: ", tasks);
     chrome.storage.local.set(tasks)
-    createAlarm();
+    
 }
 
 chrome.runtime.onMessage.addListener(data => { //listens to checkboxes
