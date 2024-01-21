@@ -186,6 +186,8 @@ chrome.alarms.onAlarm.addListener((alarm) => {
             iconUrl: "popup/images/icon.png",
             type: "basic"
        })
+	xp +=30;
+	sendXP()
     }
 
 });
