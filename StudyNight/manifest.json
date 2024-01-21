@@ -2,7 +2,7 @@
 	"manifest_version": 3 ,
 	"name": "Study Night",
 	"description": "study tool",
-	"version": "2.0",
+	"version": "3.0",
 	"action":{
 		"default_popup": "popup/popup.html"
 	},
