@@ -5,7 +5,7 @@
 
 body{
     width: 265px;
-    height: 437px; 
+    height: 500px; 
     background-color: #FFE8D4;
     font-family: vt232;
     
@@ -15,7 +15,7 @@ body{
     width: 100%;
     height: 100%;
     background-image: url(images/border.png);
-    background-size: 265px 437px;
+    background-size: 265px 500px;
 }
 
 .timer {
@@ -79,7 +79,7 @@ body{
 }
 
 .websiteBlocker {
-    width: 211px;
+    width: 160px;
     height: 16px;
 
     transform: translate(28px, 10px);
@@ -153,20 +153,20 @@ body{
 
 .game {
     width: 211px;
-    height: 86px;
-    transform: translate(28px, 13px);
+    height: 124px;
+    transform: translate(28px, 18px);
 }
 
 #display {
+    width: 100%;
     height: 100%;
-    width: 145px;
-    background-image: url(images/background.gif);
+    background-image: url(images/background1.gif);
     background-size: 100%;
     margin: 0;
 }
 
 #gear {
-    height: 100%;
+    height: 30px;
     width: 59px;
     margin: 0;
     transform: translate(0px, -43px);
@@ -179,21 +179,22 @@ body{
 #textInput {
     height: 100%;
     width: 182px;
-    background-image: url(images/websitebar.png);
     background-size: 100%;
 }
 
 #blockerButton {
-    height: 100%;
-    width: 18px;
+    height: 18.5px;
+    width: 21px;
     background-color: #FFE8D4;
     padding-left: 1px;
     border: none;
-    transform: translate(0px, -1px);
+    transform: translate(10px, -px);
+    background-image: url(images/smallbutton.png);
+    background-size: 100%;
 }
 
 #buttonImage {
-    width: 18px;
+    width: 21px;
     height: 100%;
     background-image: url(images/smallbutton.png);
     background-size: 100%;
@@ -214,9 +215,80 @@ body{
     height: 14px;
     background-image: url(images/gearbar.png);
     background-size: 100%;
+    transform: translate(95px, 37px);
 }
 
 .gearType {
     margin: 0;
-    color:#964E3F
+    color:#964E3F;
+    transform: translate(50px, 50px);
+}
+
+#inputForm {
+    text-decoration: none;
+    border:#964E3F;
+    border-radius: 5px;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #FFE8D4;
+    transform: translate(5px, -3.5px);
+    width: 170px;
+    font-family: vt232;
+    font-size: 11px;
+}
+
+#websiteForm {
+    width:211px;
+}
+
+/* this is the id for the xp bar */
+#fillBar {
+    width: 0%;
+    height: 6.75px;
+    background-color: #2C2D4D;
+    transition: 0.5s;
+}
+
+#fillBarCon {
+    width: 184px;
+    height: 6px;
+    float:center;
+    transform: translate(13.5px, 2px);
+}
+
+.fill {
+    background-color: #2C2D4D;
+    height: 11.5px;
+    width:20px;
+    display: inline-block;
+}
+
+#fillOne {
+    width: 6.5px;
+    transform: translate(5px, 1.25px);
+    opacity: 0;
+}
+
+#fillTwo {
+    width: 10.5px;
+    transform: translate(107.5px, 24.25px);
+    opacity: 0;
+}
+
+#fillThree {
+    width: 10.5px;
+    transform: translate(103.75px, 24.25px);
+    opacity: 0;
+}
+
+#fillFour {
+    width: 11px;
+    transform: translate(100px, 24.25px);
+    opacity: 0;
+}
+
+#fillFive {
+    width: 6.5px;
+    transform: translate(96px, 24.25px);
+    opacity: 0;
 }
