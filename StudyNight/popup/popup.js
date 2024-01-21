@@ -46,7 +46,7 @@ function sub100() {
 }
 
 
-function handleCheckboxClick(index) { return () => {
+function handleCheckboxClick(index) { return () => { //sends message to background.js for checked/unchecked boxes
         const checkedEvent = `checked${index + 1}`;
         const uncheckedEvent = `unchecked${index + 1}`;
 
