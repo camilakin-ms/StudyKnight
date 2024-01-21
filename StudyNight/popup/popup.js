@@ -2,6 +2,9 @@
 //XP ELEMENT
 let xpElement = document.getElementById("XP")
 
+//LEVEL ELEMENT
+let levelElement = document.getElementById("levelID")
+
 function updateClock(){
     const clockElement = document.getElementById("clock")
     const cTime = new Date();
@@ -12,6 +15,7 @@ function updateClock(){
     const formattedTime = `${h<10 ? `0` : ``}${h}:${m<10 ? `0` : ``}${m}:${s<10 ? `0` : ``}${s}`;
     clockElement.innerHTML = formattedTime;
 }
+
 //updateClock();
 setInterval(updateClock, 1000);
 
@@ -22,14 +26,14 @@ chrome.runtime.onMessage.addListener(ndata => {
         console.log("Updated Level:", lpoints);
         displayGif(lpoints);
         extendBar(lpoints);
-        //xpElement.innerHTML = level;   place level
+        levelElement.innerHTML = level;
         
     }
 })
 
 chrome.storage.local.get("level", function(data) {
-    const levValue = data.xp !== undefined ? data.level : 0;
-    //levelElement.textContent = levValue
+    const levValue = data.xp !== undefined ? data.level : 1;
+    levelElement.innerHTML = levValue
     console.log("level loaded", data.level);
 })
 
@@ -125,7 +129,7 @@ startButton.onclick = () => {
     //displayGif(levValue);
 }
 
-websiteBlockButton.onclick = () => {                    //submit website block button HERE HERE IM WORKING HERE AFTER INPUT SETUP
+websiteBlockButton.onclick = () => {                    //submit bad website
     let inputWebsite = websiteBlock.value;
     console.log("blocked website logged: ", inputWebsite)
     chrome.runtime.sendMessage({event: 'websiteBlockClick', inputWebsite})
@@ -161,7 +165,7 @@ chrome.storage.local.get(null, function(data) {
     });
 });
 
-//checck and undo
+//check and undo
 function resetCheckboxes() {
     const boxState = {};
     checkboxes.forEach((checkbox, index) => {
@@ -174,9 +178,6 @@ function resetCheckboxes() {
         console.log("Checkbox states reset.");
     });
 }
-
-
-
 
 //storage
 chrome.storage.local.get(["task1","task2","task3","task4","task5"], (result) =>{
@@ -250,16 +251,14 @@ function displayGif(level){
         updateLevelAndBackground(level, gif)
     }
 }
+
 function updateLevelAndBackground(level, gif) {
     chrome.storage.local.set({ level, gif });
 }
+
 chrome.storage.local.get(['level', 'gif'], function(data) {
     const { level, gif } = data;
     if (level && gif) {
         displayGif(level);
     }
 });
-
-
-
-//updateClock();
