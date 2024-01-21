@@ -182,7 +182,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         console.log("ALARM 2");
         chrome.notifications.create({
             title:"30 min marker",
-            message: '30 minutes working, keep it up!',
+            message: '30 minutes working, good job! Remember to take breaks',
             iconUrl: "popup/images/icon.png",
             type: "basic"
        })
