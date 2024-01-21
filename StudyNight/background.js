@@ -37,7 +37,7 @@ function levelUp() {
         chrome.notifications.create({
             title:"level up notify: unlock item",
             message: `Level UP: ${level}! YOU HAVE UNLOCKED AN ITEM`,
-            iconUrl: "./images/smile-big.png",
+            iconUrl: "popup/images/icon.png",
             type: "basic"
         })
     }
@@ -45,7 +45,7 @@ function levelUp() {
         chrome.notifications.create({
             title:"win notify",
             message: `***** YOU WON!! *****`,
-            iconUrl: "./images/smile-big.png",
+            iconUrl: "popup/images/icon.png",
             type: "basic"
         })
     }
@@ -53,7 +53,7 @@ function levelUp() {
         chrome.notifications.create({
             title:"level up notify",
             message: `Level UP: ${level}! Advance more levels to unlock an item.`,
-            iconUrl: "./images/smile-big.png",
+            iconUrl: "popup/images/icon.png",
             type: "basic"
         })
     }
@@ -163,7 +163,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         chrome.notifications.create({
             title:"30 min marker",
             message: '30 minutes passed, keep it up',
-            iconUrl: "./images/smile-big.png",
+            iconUrl: "popup/images/icon.png",
             type: "basic"
        })
     }
