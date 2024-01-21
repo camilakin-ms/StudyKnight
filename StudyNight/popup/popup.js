@@ -13,7 +13,7 @@ chrome.runtime.onMessage.addListener(data => {
 
 chrome.storage.local.get("xp", function(data) {
     const xpValue = data.xp !== undefined ? data.xp : 0;
-    xpElement("XP").textContent = xpValue
+    xpElement("XP").textContent = xpValue;
     console.log("xp loaded", xp);
 })
 
